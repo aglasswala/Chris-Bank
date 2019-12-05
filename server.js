@@ -1,5 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require("passport");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -31,7 +33,8 @@ async function init() {
   mongoose
     .connect(DB_URI, {
       useNewUrlParser: true,
-      useFindAndModify: false
+      useFindAndModify: false,
+      useUnifiedTopology: true
     })
     .then(() => {
       console.log("connected to mongodb");
