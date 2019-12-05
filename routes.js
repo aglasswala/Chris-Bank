@@ -5,9 +5,7 @@ const userController = require("./controllers/userController");
 // const employeeController = require("./controllers/employeeController");
 
 module.exports = router => {
-  router.get("/", (req, res) =>
-    res.sendFile(path.join(__dirname + "/public/index.html"))
-  );
+  router.get("/", (req, res) => res.status(200).send({ yes: "oh yeah" }));
 
   //User Routes
   router.get("/api/u", userController.getCurrentUser);
