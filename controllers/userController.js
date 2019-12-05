@@ -18,11 +18,11 @@ module.exports = {
   },
 
   registerUser: (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body);
-    //check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // const { errors, isValid } = validateRegisterInput(req.body);
+    // //check validation
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
     User.findOne({ email: req.body.email }).then(user => {
       if (user) {
@@ -49,11 +49,11 @@ module.exports = {
   },
 
   loginUser: (req, res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
-    //check validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // const { errors, isValid } = validateLoginInput(req.body);
+    // //check validation
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
     const email = req.body.email;
     const password = req.body.password;
     //Find user by email
