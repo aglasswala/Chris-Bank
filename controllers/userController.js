@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { secretOrKey, mailchimpKey } = require("../../config/keys");
+const { secretOrKey } = process.env;
 const passport = require("passport");
 
-const User = require("../../models/User");
+const User = require("../models/User");
 
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 module.exports = {
   getCurrentUser: (req, res) => {
