@@ -1,9 +1,9 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+require("dotenv").config();
 
-const router = require('./routes');
+const router = require("./routes");
 
 function startServer(server) {
   const { PORT } = process.env;
@@ -14,10 +14,29 @@ function startServer(server) {
 }
 
 async function init() {
+  const { DB_URI } = process.env;
+
   const app = express();
 
   app.use(bodyParser.json());
   app.use(cors());
+
+  //Passport middleware
+  app.use(passport.initialize());
+
+  //Passport Config
+  require("./config/passport")(passport);
+
+  //connect to db
+  mongoose
+    .connect(DB_URI, {
+      useNewUrlParser: true,
+      useFindAndModify: false
+    })
+    .then(() => {
+      console.log("connected to mongodb");
+    })
+    .catch(err => console.log(err));
 
   router(app);
   startServer(app);
