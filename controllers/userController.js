@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { secretOrKey } = process.env;
-const passport = require("passport");
 
 const User = require("../models/User");
 
@@ -9,6 +8,9 @@ const User = require("../models/User");
 // const validateLoginInput = require("../validation/login");
 
 module.exports = {
+  test: (req, res) => {
+    return res.status(200).json("all good");
+  },
   getCurrentUser: (req, res) => {
     res.status(200).json({
       firstName: req.user.firstName,
