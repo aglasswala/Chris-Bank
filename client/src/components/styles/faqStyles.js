@@ -1,4 +1,3 @@
-import image from './pictures/msulanding.jpg'
 
 const faqStyles = theme => ({
     wrapper: {
@@ -9,7 +8,6 @@ const faqStyles = theme => ({
     	width: "100%",
     	height: "auto",
         minHeight: "100vh",
-    	backgroundImage: `url(${image})`,
     	backgroundRepeat: "no-repeat",
     	backgroundSize: "cover",
         backgroundAttachment: "fixed"

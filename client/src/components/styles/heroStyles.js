@@ -1,5 +1,3 @@
-import image from './pictures/msulanding.jpg'
-
 const heroStyles = theme => ({
     heroText: {
         color: "white",
@@ -30,7 +28,6 @@ const heroStyles = theme => ({
         width: "100%",
         height: "auto",
         minHeight: "100vh",
-        backgroundImage: `url(${image})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundAttachment: "fixed"

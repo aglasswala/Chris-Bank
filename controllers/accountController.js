@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 const Account = require("../models/Account");
-const Transaction = require("../models/Transaction");
+// const Transaction = require("../models/Transaction");
 
 // const validateRegisterInput = require("../validation/register");
 // const validateLoginInput = require("../validation/login");
