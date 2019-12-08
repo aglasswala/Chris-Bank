@@ -1,5 +1,3 @@
-const jwt = require("jsonwebtoken");
-
 const User = require("../models/User");
 const Account = require("../models/Account");
 // const Transaction = require("../models/Transaction");
@@ -10,6 +8,12 @@ const Account = require("../models/Account");
 module.exports = {
   test: (req, res) => {
     return res.status(200).json("accounts route. all good");
+  },
+
+  getBalance: (req, res)=>{
+    Accounts.findOne({user: req.user.id}).then(account=>{
+      return res.status(200).json({user: req.user.email, balance: account.balance});
+    })
   },
 
   makeTransaction: (req, res) => {
@@ -32,8 +36,13 @@ module.exports = {
         })
           .save()
           .then(transaction => {
-            fromAccount -= ammont;
-            toAccount += ammount;
+            fromAccount.balance -= ammont;
+            fromAccount.save().then(()=>{
+              toAccount.balance +=ammount;
+              toAccount.save().then(()=>{
+                res.status(200).json("transaction complete");
+              })
+            })
           });
       });
     });

@@ -8,7 +8,7 @@ const AccountSchema = new Schema({
     ref: "users"
   },
   type: {
-    Type: String,
+    type: String,
     enum: ["checking", "savings"]
   },
   accountNumber: {
@@ -18,6 +18,10 @@ const AccountSchema = new Schema({
   routingNumber: {
     type: Number,
     required: true
+  },
+  balance:{
+    type: Number,
+    default: 100
   }
 });
 

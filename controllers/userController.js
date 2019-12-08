@@ -53,6 +53,7 @@ module.exports = {
   },
 
   loginUser: (req, res) => {
+    let errors={}
     // const { errors, isValid } = validateLoginInput(req.body);
     // //check validation
     // if (!isValid) {
