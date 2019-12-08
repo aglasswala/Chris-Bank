@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { secretOrKey } = process.env;
 
 const User = require("../models/User");
+const Transaction = require("../models/Transaction");
 
 // const validateRegisterInput = require("../validation/register");
 // const validateLoginInput = require("../validation/login");
@@ -25,8 +26,8 @@ module.exports = {
           return res.status(400).json(errors);
         }
         new Transaction({
-          fromID: fromUser.ID,
-          toID: toUser.ID,
+          fromID: fromUser.id,
+          toID: toUser.id,
           amount: req.body.amount
         })
           .save()

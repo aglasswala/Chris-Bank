@@ -49,7 +49,19 @@ module.exports = {
 
     newUser
       .save()
-      .then(user => res.status(200).send({ user }))
+      .then(user => {
+        const payload = {
+          id: user.id,
+          email: user.email
+        };
+        jwt.sign(payload, secretOrKey, { expiresIn: 3600 }, (err, token) => {
+          res.json({
+            success: true,
+            token: "Bearer " + token,
+            user
+          });
+        });
+      })
       .catch(err => res.status(400).send({ err }));
   },
 
