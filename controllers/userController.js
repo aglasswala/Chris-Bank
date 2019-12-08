@@ -25,6 +25,9 @@ module.exports = {
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
+    
+    const { password } = req.body
+    const hashedPass = bcrypt.hashSync(password, 10)
 
     const newUser = await User.findOne({ email: req.body.email }).then(user => {
       if (user) {
@@ -37,7 +40,7 @@ module.exports = {
           SSN: req.body.SSN,
           address: req.body.address,
           email: req.body.email,
-          password: req.body.password
+          password: hashedPass
         });
 
         return newUser
@@ -45,10 +48,7 @@ module.exports = {
     })
 
     newUser.save()
-        .then(user => {
-          console.log("yes")
-          return res.status(200).send({ user })
-        })
+        .then(user => res.status(200).send({ user }))
         .catch(err => res.status(400).send({ err }));
   },
 

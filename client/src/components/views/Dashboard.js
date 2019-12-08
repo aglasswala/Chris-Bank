@@ -41,7 +41,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Cris Bank
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -62,7 +62,6 @@ const Dashboard = () => {
 	const handleDrawerClose = () => {
 	  setOpen(false)
 	}
-
 
 	function MainDash() {
 		return (
@@ -107,7 +106,7 @@ const Dashboard = () => {
 	          Dashboard
 	        </Typography>
 	        <IconButton color="inherit">
-	          <Badge badgeContent={4} color="secondary">
+	          <Badge badgeContent={9} color="secondary">
 	            <NotificationsIcon />
 	          </Badge>
 	        </IconButton>
