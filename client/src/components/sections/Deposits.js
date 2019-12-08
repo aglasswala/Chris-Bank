@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits() {
+const Deposits = () => {
   const classes = useStyles();
   return (
     <Fragment>
@@ -26,10 +26,10 @@ export default function Deposits() {
         on 15 March, 2019
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View balance
-        </Link>
+        <Button variant="contained" color="primary"> Transfer </Button>
       </div>
     </Fragment>
   );
 }
+
+export default Deposits

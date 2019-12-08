@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 
 import clsx from 'clsx';
 import dashboardStyles from '../styles/dashboardStyles'
@@ -50,8 +50,10 @@ function Copyright() {
 }
 
 
-const Dashboard = () => {
+const Dashboard = ({ ...props }) => {
 	const [open, setOpen] = useState(true);
+	const [user, setUser] = useState({});
+
 	const classes = dashboardStyles()
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -62,6 +64,29 @@ const Dashboard = () => {
 	const handleDrawerClose = () => {
 	  setOpen(false)
 	}
+
+	const handleUser = (usr) => {
+		return setUser(usr)
+	}
+
+	useEffect(() => {
+		if (localStorage.getItem("cool-jwt")) {
+			fetch('http://localhost:3001/api/u/', { 
+			    method: "get",
+			    headers: {
+			    	'Content-Type': "application/json",
+			    	'Authorization': localStorage.getItem("cool-jwt")
+			    }
+			})
+			.then(response => response.json())
+			.then(result => {
+				console.log(result)
+			})
+			.catch(err => console.log(err))
+		} else {
+			props.history.push("/")
+		}
+	}) 
 
 	function MainDash() {
 		return (
