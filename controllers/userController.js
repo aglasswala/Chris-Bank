@@ -25,9 +25,8 @@ module.exports = {
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
-    console.log(req.body)
 
-    User.findOne({ email: req.body.email }).then(user => {
+    const newUser = await User.findOne({ email: req.body.email }).then(user => {
       if (user) {
         errors.email = "Email already exists";
         return res.status(400).json(errors);
@@ -41,17 +40,9 @@ module.exports = {
           password: req.body.password
         });
 
-          return res.status(400).json(errors);
-        } else {
-          const hashedPass = bcrypt.hashSync(password, 10)
-          const newUser = new User({
-            email: email,
-            password: hashedPass
-          });
-          
-          return newUser
-        }
-    });
+        return newUser
+      };
+    })
 
     newUser.save()
         .then(user => {

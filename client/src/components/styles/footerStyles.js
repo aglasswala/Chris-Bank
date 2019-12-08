@@ -1,4 +1,3 @@
-
 const footerStyles = theme => ({
     heroText: {
         color: "white",

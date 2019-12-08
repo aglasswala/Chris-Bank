@@ -61,41 +61,6 @@ class About extends Component {
                         </Grid>
                     </Grid> 
                 </div>
-                    <Grid
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="center"
-                    >
-                        <Grid item>
-                            <div className={classes.wrapper}>
-                                <Typography
-                                    variant="h5"
-                                    color="secondary"
-                                    align="center"
-                                    className={classes.round2}
-                                >
-                                    Sign up for the world's best banking service
-                                </Typography>
-                            </div>
-                        </Grid>
-                        <Grid item>
-                            <Grid container justify="center">
-                                <Grid item>
-                                    <div className={classes.wrapper}>
-                                        <NavLink
-                                            to="register"
-                                            style={{textDecoration: "none"}}
-                                        >
-                                            <Button variant="contained" color="primary" className={classes.Button}>
-                                                Get started 
-                                            </Button>
-                                        </NavLink>
-                                    </div>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
             </Fragment>
         )
     }

@@ -7,6 +7,7 @@ import Faq from "../sections/Faq"
 import Footer from "../sections/Footer"
 import Schedule from "../sections/Schedule"
 import Sponsors from "../sections/Sponsors"
+import GetStarted from "../sections/GetStarted"
 
 
 class LandingPage extends Component {
@@ -18,7 +19,7 @@ class LandingPage extends Component {
                 <NavBar />
                 <Hero />
                 <About />
-                <hr style={{width: "50vw"}} />
+                <GetStarted />
                 <Footer />
             </Fragment>
         )

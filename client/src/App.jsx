@@ -1,10 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
 import LandingPage from './components/views/Landing';
 import Login from './components/views/Login'
 import Register from './components/views/Register'
+import Dashboard from './components/views/Dashboard'
 import BackgroundSlider from 'react-background-slider'
 
 import image1 from './components/styles/pictures/card.jpg'
@@ -23,7 +24,7 @@ const theme = createMuiTheme({
 });
 
 const App = () => (
-  <BrowserRouter>
+  <Router>
     <MuiThemeProvider theme={theme}>
       <BackgroundSlider
         images={[image1, image3, image4]}
@@ -32,9 +33,10 @@ const App = () => (
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/dashboard" component={Dashboard} />
       </Switch>
     </MuiThemeProvider>
-  </BrowserRouter>
+  </Router>
 
 );
 

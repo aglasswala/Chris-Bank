@@ -11,24 +11,24 @@ class Register extends Component {
     const { classes } = this.props;
     return (
       <Fragment>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              style={{ height: "100vh" }}
-            >
-              <Grid item xs sm={12} md={6}>
-                <Typography variant="h1" align="left" color="primary" style={{marginBottom: "-12px", fontFamily: "Dancing Script, cursive", textShadow: "1px 1px #000000"}}>
-                  Register
-                </Typography>
-                <Paper className={classes.paper}>
-                  <div className={classes.outer}>
-                    <RegisterForm submit={this.submit} />
-                  </div>
-                </Paper>
-              </Grid>
-            </Grid>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+          style={{ height: "100vh" }}
+        >
+          <Grid item xs sm={12} md={6}>
+            <Typography variant="h1" align="left" color="primary" style={{marginBottom: "-12px", fontFamily: "Dancing Script, cursive", textShadow: "1px 1px #000000"}}>
+              Register
+            </Typography>
+            <Paper className={classes.paper}>
+              <div className={classes.outer}>
+                Something
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
       </Fragment>
     );
   }

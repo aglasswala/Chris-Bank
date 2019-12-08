@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 const Footer = ({ ...props }) => {
     const { classes } = props
     return (
-    	<div style={{height: "100px"}}>
+    	<div style={{height: "80px"}}>
             <Grid
               container
               direction="row"
