@@ -67,11 +67,9 @@ const Register = ({ ...props }) => {
     .then(response => response.json())
     .then(result => {
       if (result.token) {
-        localStorage.setItem('cool-jwt', token)
+        localStorage.setItem('cool-jwt', result.token)
         props.history.push('/dashboard')
       }
-
-      console.log("SFS")
     })
     .catch(err => console.log(err))
   }
