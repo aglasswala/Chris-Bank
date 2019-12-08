@@ -31,8 +31,7 @@ module.exports = {
 
     const newUser = await User.findOne({ email: req.body.email }).then(user => {
       if (user) {
-        errors.email = "Email already exists";
-        return res.status(400).json(errors);
+        return res.status(400).json("Email already exists");
       } else {
         const newUser = new User({
           firstName: req.body.firstName,
