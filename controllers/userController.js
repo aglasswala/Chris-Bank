@@ -19,35 +19,38 @@ module.exports = {
     });
   },
 
-  registerUser: (req, res) => {
+  registerUser: async (req, res) => {
     // const { errors, isValid } = validateRegisterInput(req.body);
     // //check validation
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
 
-    User.findOne({ email: req.body.email }).then(user => {
-      if (user) {
-        errors.email = "Email already exists";
-        return res.status(400).json(errors);
-      } else {
-        const newUser = new User({
-          email: req.body.email,
-          password: req.body.password
-        });
+    const { email, password } = req.body
+    const newUser = await User
+      .findOne({ email: email })
+      .then(user => {
+        if (user) {
+          errors.email = "Email already exists";
 
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then(user => res.json(user))
-              .catch(err => console.log(err));
+          return res.status(400).json(errors);
+        } else {
+          const hashedPass = bcrypt.hashSync(password, 10)
+          const newUser = new User({
+            email: email,
+            password: hashedPass
           });
-        });
-      }
+          
+          return newUser
+        }
     });
+
+    newUser.save()
+        .then(user => {
+          console.log("yes")
+          return res.status(200).send({ user })
+        })
+        .catch(err => res.status(400).send({ err }));
   },
 
   loginUser: (req, res) => {
