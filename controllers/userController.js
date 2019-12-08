@@ -25,9 +25,9 @@ module.exports = {
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
-    
-    const { password } = req.body
-    const hashedPass = bcrypt.hashSync(password, 10)
+
+    const { password } = req.body;
+    const hashedPass = bcrypt.hashSync(password, 10);
 
     const newUser = await User.findOne({ email: req.body.email }).then(user => {
       if (user) {
@@ -42,22 +42,18 @@ module.exports = {
           password: hashedPass
         });
 
-        return newUser
-      };
-    })
+        return newUser;
+      }
+    });
 
-    newUser.save()
-        .then(user => res.status(200).send({ user }))
-        .catch(err => res.status(400).send({ err }));
+    newUser
+      .save()
+      .then(user => res.status(200).send({ user }))
+      .catch(err => res.status(400).send({ err }));
   },
 
   loginUser: (req, res) => {
-    let errors={}
-    // const { errors, isValid } = validateLoginInput(req.body);
-    // //check validation
-    // if (!isValid) {
-    //   return res.status(400).json(errors);
-    // }
+    let errors = {};
     const email = req.body.email;
     const password = req.body.password;
     //Find user by email
@@ -92,5 +88,8 @@ module.exports = {
         }
       });
     });
+  },
+  getBalance: (req, res) => {
+    return res.status(200).json(req.user.balance);
   }
 };
