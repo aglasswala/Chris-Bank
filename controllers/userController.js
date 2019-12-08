@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { secretOrKey } = process.env;
+const { SecretOrKey } = process.env;
 
 const User = require("../models/User");
 
@@ -53,7 +53,7 @@ module.exports = {
           id: user.id,
           email: user.email
         };
-        jwt.sign(payload, secretOrKey, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(payload, SecretOrKey, { expiresIn: 3600 }, (err, token) => {
           res.json({
             success: true,
             token: "Bearer " + token,
