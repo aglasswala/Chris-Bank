@@ -15,7 +15,7 @@ module.exports = {
     res.status(200).json({
       firstName: req.user.firstName,
       lastName: req.user.lastName,
-      accounts: req.user.accounts
+      balance: req.user.balance
     });
   },
 
@@ -88,7 +88,7 @@ module.exports = {
           };
 
           //Sign Token
-          jwt.sign(payload, secretOrKey, { expiresIn: 3600 }, (err, token) => {
+          jwt.sign(payload, SecretOrKey, { expiresIn: 3600 }, (err, token) => {
             res.json({
               success: true,
               token: "Bearer " + token
