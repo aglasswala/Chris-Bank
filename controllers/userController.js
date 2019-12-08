@@ -15,7 +15,7 @@ module.exports = {
     res.status(200).json({
       firstName: req.user.firstName,
       lastName: req.user.lastName,
-      accounts: req.user.accounts
+      balance: req.user.balance
     });
   },
 

@@ -1,7 +1,3 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { secretOrKey } = process.env;
-
 const User = require("../models/User");
 const Transaction = require("../models/Transaction");
 
@@ -17,12 +13,12 @@ module.exports = {
     errors = {};
     User.findOne({ email: req.user.email }).then(fromUser => {
       if (!fromUser) {
-        errors.accountNotFound = "From Account Not Found";
+        errors.fromAccountNotFound = "From Account Not Found";
         return res.status(400).json(errors);
       }
       User.findOne({ email: toEmail }).then(toUser => {
         if (!toUser) {
-          errors.accountNotFound = "To User Not Found";
+          errors.toAccountNotFound = "To User Not Found";
           return res.status(400).json(errors);
         }
         new Transaction({
@@ -34,7 +30,7 @@ module.exports = {
           .then(transaction => {
             fromUser.balance -= amount;
             fromUser.save().then(() => {
-              toUser.balance += amount;
+              toUser.balance = +toUser.balance + +amount;
               toUser.save().then(() => {
                 res.status(200).json("transaction complete");
               });
