@@ -2,8 +2,7 @@ const path = require("path");
 const passport = require("passport");
 
 const userController = require("./controllers/userController");
-const accountController = require("./controllers/accountController");
-const employeeController = require("./controllers/employeeController");
+const transactionController = require("./controllers/transactionController");
 
 module.exports = router => {
   router.get("/", (req, res) => res.status(200).send({ yes: "oh yeah" }));
@@ -17,11 +16,21 @@ module.exports = router => {
   );
   router.post("/api/u/register", userController.registerUser);
   router.post("/api/u/login", userController.loginUser);
+  router.post(
+    "/api/u/getbalance",
+    passport.authenticate("jwt", { session: false }),
+    userController.getBalance
+  );
 
-  //Account Routes
-
-  //Employee Routes
-  router.get("/api/e/test", employeeController.test);
-  router.post("/api/e/ca", employeeController.createAccount);
-  router.post("/api/e/finduser",employeeController.findUser);
+  //Transaction Routes
+  router.post(
+    "/api/t",
+    passport.authenticate("jwt", { session: false }),
+    transactionController.makeTransaction
+  );
+  // router.get(
+  //   "/api/t",
+  //   passport.authenticate("jwt", { session: false }),
+  //   transactionController.getHistory
+  // );
 };

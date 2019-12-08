@@ -6,16 +6,16 @@ const TransactionSchema = new Schema({
   fromID: {
     type: Schema.Types.ObjectId,
     ref: "users",
-    required: true
+    required: [true, "please enter the origin user"]
   },
   toID: {
     type: Schema.Types.ObjectId,
     ref: "users",
-    required: true
+    required: [true, "please enter destination user"]
   },
   amount: {
     type: Number,
-    required: true
+    required: [true, "please enter the amount"]
   },
   timestamp: {
     type: Date,
@@ -23,4 +23,7 @@ const TransactionSchema = new Schema({
   }
 });
 
-module.exports = Transaction = mongoose.model("transactions", TransactionSchema);
+module.exports = Transaction = mongoose.model(
+  "transactions",
+  TransactionSchema
+);
