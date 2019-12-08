@@ -31,7 +31,7 @@ async function init() {
   require("./config/passport")(passport);
 
   //connect to db
-  mongoose
+  await mongoose
     .connect(DB_URI, {
       useNewUrlParser: true,
       useFindAndModify: false,

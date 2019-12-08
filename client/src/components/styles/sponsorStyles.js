@@ -1,5 +1,3 @@
-import image from './pictures/msulanding.jpg'
-
 const sponsorStyles = (theme) => ({
 	wholeWrapper: {
 		marginTop: "100px",
@@ -12,7 +10,6 @@ const sponsorStyles = (theme) => ({
     	width: "100%",
     	height: "auto",
         minHeight: "100vh",
-    	backgroundImage: `url(${image})`,
     	backgroundRepeat: "no-repeat",
     	backgroundSize: "cover",
         backgroundAttachment: "fixed"

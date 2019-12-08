@@ -15,7 +15,8 @@ const aboutStyles = theme => ({
     	width: "50%"
     },
     wrapper: {
-        padding: "40px"
+        padding: "40px",
+        paddingBottom: 10
     },
     img: {
         minWidth: "100px",
@@ -28,7 +29,27 @@ const aboutStyles = theme => ({
     },
     icons: {
         align: "center",
-    }
+    },
+    round2: {
+       fontSize: "calc(12px + 1.5vw)",
+       fontFamily: "Roboto"
+    },
+    Button: {
+        padding: 20,
+        paddingLeft: 40,
+        paddingRight: 40,
+        marginBottom: 20,
+        marginLeft: "1rem",
+        marginRight: "1rem",
+        marginTop: 0,
+        fontSize: "1rem",
+        fontFamily: 'Roboto',
+        borderRadius: "0",
+        color: "white",
+        '&:active, &:focus': {
+            boxShadow: 'none',
+        },
+    },
 })
 
 export default aboutStyles

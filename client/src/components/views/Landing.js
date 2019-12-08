@@ -8,6 +8,7 @@ import Footer from "../sections/Footer"
 import Schedule from "../sections/Schedule"
 import Sponsors from "../sections/Sponsors"
 
+
 class LandingPage extends Component {
 
     render() {
@@ -18,7 +19,6 @@ class LandingPage extends Component {
                 <Hero />
                 <About />
                 <hr style={{width: "50vw"}} />
-                <Faq />
                 <Footer />
             </Fragment>
         )

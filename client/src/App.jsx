@@ -5,14 +5,19 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import LandingPage from './components/views/Landing';
 import Login from './components/views/Login'
 import Register from './components/views/Register'
+import BackgroundSlider from 'react-background-slider'
+
+import image1 from './components/styles/pictures/card.jpg'
+import image3 from './components/styles/pictures/money.jpg'
+import image4 from './components/styles/pictures/building.jpg'
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#E9190F',
+      main: '#42a5f5',
     },
     secondary: {
-      main: '#FBFBFF',
+      main: '#4C4B63',
     },
   },
 });
@@ -20,10 +25,13 @@ const theme = createMuiTheme({
 const App = () => (
   <BrowserRouter>
     <MuiThemeProvider theme={theme}>
+      <BackgroundSlider
+        images={[image1, image3, image4]}
+        duration={2} transition={2} />
       <Switch>
-        <Route exact path="/" render={(props) => <LandingPage {...props} />} />
-        <Route exact path="/login" render={(props) => <Login {...props} />} />
-        <Route exact path="/register" render={(props) => <Register {...props} />} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={Register} />
       </Switch>
     </MuiThemeProvider>
   </BrowserRouter>

@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { withStyles, Grid, Typography } from "@material-ui/core"
+import { withStyles, Grid, Typography, Button } from "@material-ui/core"
 import aboutStyles from "../styles/aboutStyles"
 
-import peopleIcon from '../styles/pictures/peopleIcon.png'
-import moneyIcon from '../styles/pictures/moneyIcon.png'
-import gameIcon from '../styles/pictures/gameIcon.png'
+import image from '../styles/pictures/reading.jpg'
+import { NavLink } from 'react-router-dom'
 
 class About extends Component {
 
@@ -26,7 +25,7 @@ class About extends Component {
                                     align="center"
                                     color="primary"
                                 >
-                                    who and what?
+                                    Serving our customers and communities
                                 </Typography>
                                 <hr className={classes.hr} />
                                 <Typography
@@ -35,7 +34,7 @@ class About extends Component {
                                     gutterBottom
                                     paragraph
                                 >
-                                   HawkHack is a 24-hour hackathon event at Montclair State University. Students of any majors are welcome to form a team and build awesome software and hardware projects. Industry experts and mentors will be there to help and guide students and create a learning environment through talks, workshops, and one-on-one guidance. We encourage anyone from beginner to advanced developers to challenge themselves and create something awesome.
+                                   It doesn't happen with one transaction, in one day on the job or in one quarter. It's earned relationship by relationship.
                                 </Typography>
                             </div>
                             <div className={classes.wrapper}>
@@ -44,7 +43,7 @@ class About extends Component {
                                     align="center"
                                     color="primary"
                                 >
-                                    when and where?
+                                    Manage Your Money
                                 </Typography>
                                 <hr className={classes.hr} />
                                 <Typography
@@ -53,85 +52,50 @@ class About extends Component {
                                     gutterBottom
                                     paragraph
                                 >
-                                   <b>November 23rd, 10:00 AM to November 24th, 10:00 AM</b>
-                                   <br />
-                                   <b>Montclair State University, Student Center - Ballrooms A, B, C</b>
+                                   Explore these tools and resources for budgeting, paying down debt, building financial independence and more.
                                 </Typography>
                             </div>
                         </Grid>
                         <Grid item sm={12} md={6}>
-                            <img className={classes.img} src="https://picsum.photos/650/500" alt="there should be something really cool here" />
+                            <img className={classes.img} src={image} alt="there should be something really cool here" />
                         </Grid>
                     </Grid> 
                 </div>
-                <div className={classes.wrapper}> 
-                      <Grid
+                    <Grid
                         container
-                        direction="row"
+                        direction="column"
                         justify="center"
                         alignItems="center"
-                      >
-                        <Grid item xs={12} sm={12} md={3}>
+                    >
+                        <Grid item>
                             <div className={classes.wrapper}>
-                                <Grid
-                                  container
-                                  direction="row"
-                                  justify="center"
-                                  alignItems="center"
+                                <Typography
+                                    variant="h5"
+                                    color="secondary"
+                                    align="center"
+                                    className={classes.round2}
                                 >
-                                    <Grid item>
-                                        <div className={classes.wrapper}>
-                                            <img src={peopleIcon} width="100px" height="auto" />
-                                        </div>
-                                    </Grid>
-                                </Grid>
-                                <Typography variant="h5" align="center" >
-                                    First Hackathon at MSU with over 150+ attendees
+                                    Sign up for the world's best banking service
                                 </Typography>
                             </div>
                         </Grid>
-                        <Grid item xs={12} sm={12} md={3}>
-                            <div className={classes.border}>
-                                <div className={classes.wrapper}>
-                                    <Grid
-                                      container
-                                      direction="row"
-                                      justify="center"
-                                      alignItems="center"
-                                    >
-                                        <Grid item>
-                                            <div className={classes.wrapper}>
-                                                <img src={moneyIcon} width="100px" height="auto" />
-                                            </div>
-                                        </Grid>
-                                    </Grid>
-                                    <Typography variant="h5" align="center" >
-                                        $15,000+ in sponsorships and $1000+ in prizes 
-                                    </Typography>
-                                </div>
-                            </div>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={3}>
-                            <div className={classes.wrapper}>
-                                <Grid
-                                  container
-                                  direction="row"
-                                  justify="center"
-                                  alignItems="center"
-                                >
-                                    <Grid item>
-                                        <div className={classes.wrapper}>
-                                            <img src={gameIcon} width="100px" height="auto" />
-                                        </div>
-                                    </Grid>
+                        <Grid item>
+                            <Grid container justify="center">
+                                <Grid item>
+                                    <div className={classes.wrapper}>
+                                        <NavLink
+                                            to="register"
+                                            style={{textDecoration: "none"}}
+                                        >
+                                            <Button variant="contained" color="primary" className={classes.Button}>
+                                                Get started 
+                                            </Button>
+                                        </NavLink>
+                                    </div>
                                 </Grid>
-                                <Typography variant="h5" align="center" >
-                                    Lasertag and Smash tournament certified
-                                </Typography>
-                            </div>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </div>
             </Fragment>
         )
     }

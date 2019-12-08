@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { Grid, Typography, withStyles, Button } from '@material-ui/core'
 import heroStyles from '../styles/heroStyles';
 import { ScrollDownIndicator } from 'react-landing-page'
+import BackgroundSlider from 'react-background-slider'
+
+import image1 from '../styles/pictures/card.jpg'
+import image3 from '../styles/pictures/money.jpg'
+import image4 from '../styles/pictures/building.jpg'
 
 import { NavLink } from 'react-router-dom'
 
@@ -10,8 +15,7 @@ class Hero extends Component {
         const { classes } = this.props
     
         return (
-            <div className={classes.image}>
-                <div className={classes.grad}> 
+                <div> 
                     <Grid
                         container
                         direction="column"
@@ -60,7 +64,6 @@ class Hero extends Component {
                     </Grid>
                     <ScrollDownIndicator />
                 </div>
-            </div>
         )
     }
 }

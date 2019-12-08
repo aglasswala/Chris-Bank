@@ -13,7 +13,7 @@ const TransactionSchema = new Schema({
     ref: "users",
     required: true
   },
-  ammount: {
+  amount: {
     type: Number,
     required: true
   },
