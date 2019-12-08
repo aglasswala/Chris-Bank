@@ -25,13 +25,21 @@ module.exports = {
     // if (!isValid) {
     //   return res.status(400).json(errors);
     // }
+    console.log(req.body)
 
-    const { email, password } = req.body
-    const newUser = await User
-      .findOne({ email: email })
-      .then(user => {
-        if (user) {
-          errors.email = "Email already exists";
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user) {
+        errors.email = "Email already exists";
+        return res.status(400).json(errors);
+      } else {
+        const newUser = new User({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          SSN: req.body.SSN,
+          address: req.body.address,
+          email: req.body.email,
+          password: req.body.password
+        });
 
           return res.status(400).json(errors);
         } else {

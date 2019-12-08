@@ -9,7 +9,7 @@ const TransactionSchema = new Schema({
     required: true
   },
   toID: {
-    types: Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "users",
     required: true
   },
@@ -23,4 +23,4 @@ const TransactionSchema = new Schema({
   }
 });
 
-module.exports = User = mongoose.model("transactions", TransactionSchema);
+module.exports = Transaction = mongoose.model("transactions", TransactionSchema);
