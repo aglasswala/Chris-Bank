@@ -21,5 +21,6 @@ module.exports = router => {
   //Account Routes
 
   //Employee Routes
-  router;
+  router.get("/api/e/test", employeeController.test);
+  router.post("/api/e/ca", employeeController.createAccount);
 };

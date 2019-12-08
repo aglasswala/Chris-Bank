@@ -18,13 +18,7 @@ const AccountSchema = new Schema({
   routingNumber: {
     type: Number,
     required: true
-  },
-  transactions: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "transactions"
-    }
-  ]
+  }
 });
 
-module.exports = User = mongoose.model("accounts", AccountSchema);
+module.exports = Account = mongoose.model("accounts", AccountSchema);
