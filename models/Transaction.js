@@ -25,7 +25,8 @@ const TransactionSchema = new Schema({
   },
   amount: {
     type: Number,
-    required: [true, "please enter the amount"]
+    required: [true, "please enter the amount"],
+    min: [0, "amount cannot be negative"]
   },
   timestamp: {
     type: Date,
