@@ -28,6 +28,11 @@ module.exports = {
     // }
 
     const { password } = req.body;
+    if (password.length < 6) {
+      res
+        .status(400)
+        .json({ err: "password must be at least 6 characters long" });
+    }
     const hashedPass = bcrypt.hashSync(password, 10);
 
     const newUser = await User.findOne({ email: req.body.email }).then(user => {
