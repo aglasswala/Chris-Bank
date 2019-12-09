@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
+var morgan = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -11,7 +12,7 @@ function startServer(server) {
   const { PORT } = process.env;
 
   server.listen(PORT || 3001, () => {
-    console.log(`let's get it motherfucker, we live on ${PORT || 3001}`); // eslint-disable-line
+    console.log(`server live on ${PORT || 3001}`); // eslint-disable-line
   });
 }
 
@@ -23,6 +24,8 @@ async function init() {
   // app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json());
   app.use(cors());
+
+  morgan("tiny");
 
   //Passport middleware
   app.use(passport.initialize());

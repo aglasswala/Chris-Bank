@@ -25,7 +25,7 @@ module.exports = {
       }
       User.findOne({ email: toEmail }).then(toUser => {
         if (!toUser) {
-          return res.status(400).json({ err: "To User Not Found" });
+          return res.status(400).json({ err: "Recipient User Not Found" });
         }
         new Transaction({
           from: {
@@ -66,13 +66,11 @@ module.exports = {
             date: t.timestamp
           });
         });
-        // console.log(resp);
         //inbound transactions
         Transaction.find({ "to.user": req.user.id })
           .populate("from.user to.user")
           .then(trans => {
             trans.forEach(t => {
-              // console.log(trans);
               resp.push({
                 user: t.from.user.email,
                 amount: `+${t.amount}`,
@@ -81,11 +79,8 @@ module.exports = {
               });
             });
             resp.sort((a, b) => b.date - a.date);
-            console.log(resp);
             res.json(resp);
           });
-
-        // res.json(trans);
       });
   }
 };
