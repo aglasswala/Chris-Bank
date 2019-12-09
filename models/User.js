@@ -31,6 +31,7 @@ const UserSchema = new Schema({
   },
   balance: {
     type: Number,
+    min: [0, "insuficient funds"],
     default: 100
   },
   date: {
