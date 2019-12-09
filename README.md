@@ -3,6 +3,7 @@ get ready to redecide all your banking needs
 
 # .env format
 DB_URI=######### 
+
 SecretOrKey=########
 
 # Instructions to run locally
