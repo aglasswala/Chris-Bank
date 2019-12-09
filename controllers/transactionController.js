@@ -13,6 +13,11 @@ module.exports = {
     errors = {};
     if (amount < 0) {
       errors.bruh = "stop stealing bruh";
+    }
+    if (req.user.email === toEmail) {
+      errors.selftransfer = "you cannot transfer to yourself";
+    }
+    if (errors) {
       return res.status(400).json({ err: errors });
     }
     User.findOne({ email: req.user.email }).then(fromUser => {
