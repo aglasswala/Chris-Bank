@@ -1,12 +1,13 @@
 import React, { Component, Fragment, useState } from 'react' 
 
-import { Grid, Paper, withStyles, Typography, FormControl, InputLabel, Input, Button} from '@material-ui/core'
-
+import { Grid, Paper, withStyles, Typography, FormControl, InputLabel, Input, Button, FormHelperText} from '@material-ui/core'
+import Validator from 'validator'
 import loginStyles from '../styles/loginStyles'
 
 const Login = ({ ...props }) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const [errors, setErrors] = useState({})
 
 	const handleEmail = (e) => {
 	  return setEmail(e.target.value)
@@ -16,8 +17,25 @@ const Login = ({ ...props }) => {
 	  return setPassword(e.target.value)
 	}
 
+	const handleErrors = (err) => {
+		return setErrors(err)
+	}
+
+	const validate = (email, password) => {
+	    const errors = {}
+	    if(!Validator.isEmail(email)) errors.email = "Invalid Email";
+	    if(!password) errors.password = "Can't be blank";
+	    return errors
+	}
+
 	const submit = (e) => {
 		e.preventDefault()
+		const val = validate(email, password)
+		
+		if (Object.keys(val).length !== 0) {
+			return handleErrors(val)
+		}
+
 		fetch('http://localhost:3001/api/u/login', { 
 		    method: "post",
 		    headers: {
@@ -35,7 +53,9 @@ const Login = ({ ...props }) => {
 				props.history.push('/dashboard')
 			}
 		})
-		.catch(err => console.log(err))
+		.catch(err => {
+			handleErrors({ err })
+		})
 	}
 
 	const { classes } = props
@@ -54,6 +74,7 @@ const Login = ({ ...props }) => {
 		                    Sign In
 	                	</Typography>
 	                </div>
+	                { errors.err ? <FormHelperText error>Invalid Email or Password</FormHelperText> : null }
 		            <Paper className={classes.paper}>
 		            	<div className={classes.outer}>
 			               <form
@@ -65,6 +86,7 @@ const Login = ({ ...props }) => {
                                        <Input 
                                            id="email" 
                                            name="email" 
+                                           error={errors.email}
                                            type="text"
                                            value={email}
                                            autoComplete="email" 
@@ -72,6 +94,7 @@ const Login = ({ ...props }) => {
                                            onChange={handleEmail}
                                            className={classes.textField}
                                        />
+                                       {errors.email ? <FormHelperText error>Invalid Email</FormHelperText> : null}
                                    </FormControl>
                                </span>
                                <span className={classes.wrapper}>

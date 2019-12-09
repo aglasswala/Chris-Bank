@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react'
-import { Grid, Typography, withStyles, Button, Paper, FormControl, Input, InputLabel } from '@material-ui/core'
+import { Grid, Typography, withStyles, Button, Paper, FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core'
+import Validator from 'validator'
 import heroStyles from '../styles/heroStyles';
 import { ScrollDownIndicator } from 'react-landing-page'
 import BackgroundSlider from 'react-background-slider'
@@ -13,6 +14,7 @@ import { NavLink } from 'react-router-dom'
 const Hero = ({ ...props }) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [errors, setErrors] = useState({})
 
   const handleEmail = (e) => {
     return setEmail(e.target.value)
@@ -22,8 +24,25 @@ const Hero = ({ ...props }) => {
     return setPassword(e.target.value)
   }
 
+  const handleErrors = (err) => {
+    return setErrors(err)
+  }
+
+  const validate = (email, password) => {
+      const errors = {}
+      if(!Validator.isEmail(email)) errors.email = "Invalid Email";
+      if(!password) errors.password = "Can't be blank";
+      return errors
+  }
+
   const submit = (e) => {
     e.preventDefault()
+    const val = validate(email, password)
+    
+    if (Object.keys(val).length !== 0) {
+      return handleErrors(val)
+    }
+
     fetch('http://localhost:3001/api/u/login', { 
         method: "post",
         headers: {
@@ -39,9 +58,13 @@ const Hero = ({ ...props }) => {
       if (result.success) {
         localStorage.setItem("cool-jwt", result.token)
         window.location.href = "/dashboard"
+      } else {
+        throw new Error()
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      handleErrors({ err })
+    })
   }
 
 
@@ -110,6 +133,14 @@ const Hero = ({ ...props }) => {
                           >
                               Sign in
                           </Typography>
+                              { errors.err ?                          
+                                <Typography
+                                    variant="body1"
+                                    color="error"
+                                    align="center"
+                                >
+                                    Invalid Email or Password
+                                </Typography> : null }
                           <div className={classes.outer}>
                               <form
                                   className={classes.form}
@@ -120,6 +151,7 @@ const Hero = ({ ...props }) => {
                                           <Input 
                                               id="email" 
                                               name="email" 
+                                              error={errors.email}
                                               type="text"
                                               value={email}
                                               autoComplete="email" 
@@ -128,6 +160,7 @@ const Hero = ({ ...props }) => {
                                               className={classes.textField}
                                           />
                                       </FormControl>
+                                      {errors.email ? <FormHelperText error>Invalid Email</FormHelperText> : null}
                                   </span>
                                   <span className={classes.wrapper}>
                                       <FormControl margin="normal" fullWidth required>
@@ -136,12 +169,14 @@ const Hero = ({ ...props }) => {
                                               id="password" 
                                               name="password" 
                                               value={password}
+                                              error={errors.password}
                                               onChange={handlePassword}
                                               type="password"
                                               autoComplete="password"
                                               className={classes.textField}
                                           />
                                       </FormControl>
+                                      {errors.password ? <FormHelperText error>Invalid Password</FormHelperText> : null}
                                   </span>
                                   <span className={classes.wrapper}>
                                       <Button

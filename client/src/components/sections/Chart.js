@@ -3,41 +3,31 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
-];
-
-const filData = (rows) => {
-  let filteredRows = []
-  rows.forEach((row) => {
-    filteredRows.push({
-      time: new Date(row.date).toLocaleTimeString(),
-      amount: row.balance
-    })
-  })
-
-  return filteredRows.reverse()
-}
 
 function Chart() {
   const theme = useTheme();
   const [data, setData] = useState([])
+  const [user, setUser] = useState({});
 
   const handleData = (dat) => {
     return setData(dat)
+  }
+
+  const handleUser = (usr) => {
+    return setUser(usr)
+  }
+
+  const filData = (rows) => {
+    let filteredRows = []
+    rows.forEach((row) => {
+      filteredRows.push({
+        time: new Date(row.date).toLocaleTimeString(),
+        amount: row.balance
+      })
+    })
+
+    return filteredRows.reverse()
   }
 
   useEffect(() => {
@@ -55,6 +45,19 @@ function Chart() {
       })
       .catch(err => console.log(err))
   })  
+
+  // fetch('http://localhost:3001/api/u/', { 
+  //     method: "get",
+  //     headers: {
+  //       'Content-Type': "application/json",
+  //       'Authorization': localStorage.getItem("cool-jwt")
+  //     }
+  // })
+  // .then(response => response.json())
+  // .then(result => {
+  //   handleUser(result)
+  // })
+  // .catch(err => console.log(err))
 
   return (
     <Fragment>

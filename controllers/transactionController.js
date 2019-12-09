@@ -11,17 +11,17 @@ module.exports = {
   makeTransaction: (req, res) => {
     const { toEmail, amount } = req.body;
     if (amount < 0) {
-      return res.status(400).json({ err: "insuficient funds" });
+      return res.status(400).json({ err: "Insufficent Funds" });
     }
     if (req.user.email === toEmail) {
-      return res.status(400).json({ err: "you cannot transfer to yourself" });
+      return res.status(400).json({ err: "Invalid To User" });
     }
     User.findOne({ email: req.user.email }).then(fromUser => {
       if (!fromUser) {
         return res.status(400).json({ err: "From Account Not Found" });
       }
       if (req.user.balance < amount) {
-        return res.status(400).json({ err: "insuficient funds" });
+        return res.status(400).json({ err: "Insufficent Funds" });
       }
       User.findOne({ email: toEmail }).then(toUser => {
         if (!toUser) {
