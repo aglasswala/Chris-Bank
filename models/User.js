@@ -20,14 +20,12 @@ const UserSchema = new Schema({
     required: [true, "please enter Address"]
   },
   SSN: {
-    type: String,
+    type: Number,
     required: [true, "please enter your Social Security Number"]
   },
   password: {
     type: String,
-    required: [true, "please enter a password"],
-    min: [4, "password must be between 6 and 30 characters"],
-    max: [30, "password msut be between 6 and 30 charcaters"]
+    required: true
   },
   balance: {
     type: Number,

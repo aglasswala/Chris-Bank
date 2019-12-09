@@ -4,28 +4,31 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 var morgan = require("morgan");
 const cors = require("cors");
+
+//pull environmental variables from .env file
 require("dotenv").config();
 
+//import router
 const router = require("./routes");
 
 function startServer(server) {
   const { PORT } = process.env;
 
   server.listen(PORT || 3001, () => {
-    console.log(`server live on ${PORT || 3001}`); // eslint-disable-line
+    console.log(`server live on ${PORT || 3001}`);
   });
 }
 
 async function init() {
   const { DB_URI } = process.env;
 
+  //initalize express
   const app = express();
 
-  // app.use(bodyParser.urlencoded({ extended: false }))
-  app.use(bodyParser.json());
-  app.use(cors());
-
-  morgan("tiny");
+  //middleware
+  app.use(bodyParser.json()); //parses request body
+  app.use(cors()); //cors for hosting both front and back locally
+  app.use(morgan("tiny")); //request logging
 
   //Passport middleware
   app.use(passport.initialize());
