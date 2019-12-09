@@ -24,7 +24,6 @@ const Hero = ({ ...props }) => {
     return setPassword(e.target.value)
   }
 
-
   const handleErrors = (err) => {
     return setErrors(err)
   }
