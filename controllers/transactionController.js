@@ -11,6 +11,10 @@ module.exports = {
   makeTransaction: (req, res) => {
     const { toEmail, amount } = req.body;
     errors = {};
+    if (amount < 0) {
+      errors.bruh = "stop stealing bruh";
+      res.status(400).json(errors);
+    }
     User.findOne({ email: req.user.email }).then(fromUser => {
       if (!fromUser) {
         errors.fromAccountNotFound = "From Account Not Found";
