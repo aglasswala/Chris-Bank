@@ -16,7 +16,8 @@ module.exports = {
       firstName: req.user.firstName,
       lastName: req.user.lastName,
       balance: req.user.balance,
-      email: req.user.email
+      email: req.user.email,
+      date: req.user.date
     });
   },
 
