@@ -168,7 +168,6 @@ const Deposits = ({ ...props }) => {
   const classes = useStyles();
   return (
     <Fragment>
-      <Typography variant="body1" color="primary">Hey {user.firstName} {user.lastName}</Typography>
       <Title>Checking Balance</Title>
       <Typography component="p" variant="h4">
         ${(+(user.balance)).toFixed(2)}
