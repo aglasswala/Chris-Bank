@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 
 import clsx from 'clsx';
 import dashboardStyles from '../styles/dashboardStyles'
@@ -25,6 +25,7 @@ import Deposits from '../sections/Deposits';
 import Orders from '../sections/Orders';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Button from '@material-ui/core/Button';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -50,8 +51,9 @@ function Copyright() {
 }
 
 
-const Dashboard = () => {
+const Dashboard = ({ ...props }) => {
 	const [open, setOpen] = useState(true);
+
 	const classes = dashboardStyles()
 	const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -63,22 +65,24 @@ const Dashboard = () => {
 	  setOpen(false)
 	}
 
+	const logout = () => {
+		localStorage.removeItem("cool-jwt")
+		props.history.push("/")
+	}
+
 	function MainDash() {
 		return (
 			<Fragment>
-				{/* Chart */}
 				<Grid item xs={12} md={8} lg={9}>
 				  <Paper className={fixedHeightPaper}>
 				    <Chart />
 				  </Paper>
 				</Grid>
-				{/* Recent Deposits */}
 				<Grid item xs={12} md={4} lg={3}>
 				  <Paper className={fixedHeightPaper}>
 				    <Deposits />
 				  </Paper>
 				</Grid>
-				{/* Recent Orders */}
 				<Grid item xs={12}>
 				  <Paper className={classes.paper}>
 				    <Orders />
@@ -87,6 +91,12 @@ const Dashboard = () => {
 			</Fragment>
 		)
 	}
+
+	useEffect(() => {
+		if (!localStorage.getItem("cool-jwt")) {
+			props.history.push("/")
+		}
+	}) 
 
 	return (
 	  <div className={classes.root}>
@@ -105,24 +115,16 @@ const Dashboard = () => {
 	        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
 	          Dashboard
 	        </Typography>
-	        <IconButton color="inherit">
-	          <Badge badgeContent={9} color="secondary">
-	            <NotificationsIcon />
-	          </Badge>
-	        </IconButton>
+	        <Button color="white" onClick={logout}>
+	        	Logout
+	        </Button>
 	      </Toolbar>
 	    </AppBar>
-
 	    <main className={classes.content}>
 	      <div className={classes.appBarSpacer} />
 	      <Container maxWidth="lg" className={classes.container}>
 	        <Grid container spacing={3}>
-	         	<Switch>
-		          	<Route exact path="/dashboard" component={MainDash} />
-		          	<Route exact path="/dashboard/order" component={MainDash} />
-		          	<Route exact path="/dashboard/userprofile" component={MainDash} />
-		          	<Route exact path="/dashboard/medalists" component={MainDash} />
-		    	</Switch>
+	        	<MainDash />
 	        </Grid>
 	        <Box pt={4}>
 	          <Copyright />

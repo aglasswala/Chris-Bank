@@ -35,7 +35,7 @@ export default function Orders() {
   const classes = useStyles();
   return (
     <Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Recent Transactions</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -58,11 +58,6 @@ export default function Orders() {
           ))}
         </TableBody>
       </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
     </Fragment>
   );
 }
