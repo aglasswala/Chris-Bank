@@ -21,13 +21,11 @@ module.exports = {
         return res.status(400).json({ err: "From Account Not Found" });
       }
       if (req.user.balance < amount) {
-        errors.nofunds = "insuficient funds";
-        return re.status(400).json({ err: errors });
+        return res.status(400).json({ err: "insuficient funds" });
       }
       User.findOne({ email: toEmail }).then(toUser => {
         if (!toUser) {
-          errors.toAccountNotFound = "To User Not Found";
-          return res.status(400).json({ err: errors });
+          return res.status(400).json({ err: "To User Not Found" });
         }
         new Transaction({
           from: {
