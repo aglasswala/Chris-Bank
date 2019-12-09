@@ -25,18 +25,6 @@ const NavBar = ({ ...props }) => {
                            </Typography>
                         </div>
                     </Grid>
-                    <Grid item>
-                        <div className={classes.wrapper}>
-                            <NavLink
-                                to="login"
-                                style={{textDecoration: "none"}}
-                            >
-                                <Button variant="outline" color="inherit" className={classes.buttonNotTop}>    
-                                    Login 
-                                </Button>
-                            </NavLink>
-                        </div>
-                    </Grid>
                 </Grid>
             </Toolbar>
         </AppBar>

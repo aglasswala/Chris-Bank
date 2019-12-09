@@ -112,10 +112,10 @@ const Dashboard = ({ ...props }) => {
 	        >
 	          <MenuIcon />
 	        </IconButton>
-	        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+	        <Typography component="h1" variant="h6" noWrap className={classes.title}>
 	          Dashboard
 	        </Typography>
-	        <Button color="white" onClick={logout}>
+	        <Button onClick={logout}>
 	        	Logout
 	        </Button>
 	      </Toolbar>
