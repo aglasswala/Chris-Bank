@@ -32,7 +32,7 @@ module.exports = {
 
     const newUser = await User.findOne({ email: req.body.email }).then(user => {
       if (user) {
-        return res.status(400).json("Email already exists");
+        return res.status(400).json({ err: "Email already exists" });
       } else {
         const newUser = new User({
           firstName: req.body.firstName,
@@ -73,8 +73,7 @@ module.exports = {
     User.findOne({ email }).then(user => {
       //check for user
       if (!user) {
-        errors.email = "User not found";
-        return res.status(404).json({ err: errors });
+        return res.status(400).json({ err: "User not found" });
       }
 
       //check password
@@ -96,8 +95,7 @@ module.exports = {
             });
           });
         } else {
-          errors.password = "Password incorrect";
-          return res.status(400).json({ err: errors });
+          return res.status(400).json({ err: "Password incorrect" });
         }
       });
     });

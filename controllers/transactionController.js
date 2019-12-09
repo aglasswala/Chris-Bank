@@ -10,20 +10,15 @@ module.exports = {
   },
   makeTransaction: (req, res) => {
     const { toEmail, amount } = req.body;
-    errors = {};
     if (amount < 0) {
-      errors.bruh = "stop stealing bruh";
+      return res.status(400).json({ err: "insuficient funds" });
     }
     if (req.user.email === toEmail) {
-      errors.selftransfer = "you cannot transfer to yourself";
-    }
-    if (errors) {
-      return res.status(400).json({ err: errors });
+      return res.status(400).json({ err: "you cannot transfer to yourself" });
     }
     User.findOne({ email: req.user.email }).then(fromUser => {
       if (!fromUser) {
-        errors.fromAccountNotFound = "From Account Not Found";
-        return res.status(400).json({ err: errors });
+        return res.status(400).json({ err: "From Account Not Found" });
       }
       if (req.user.balance < amount) {
         errors.nofunds = "insuficient funds";
