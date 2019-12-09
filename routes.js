@@ -28,9 +28,9 @@ module.exports = router => {
     passport.authenticate("jwt", { session: false }),
     transactionController.makeTransaction
   );
-  // router.get(
-  //   "/api/t",
-  //   passport.authenticate("jwt", { session: false }),
-  //   transactionController.getHistory
-  // );
+  router.get(
+    "/api/t",
+    passport.authenticate("jwt", { session: false }),
+    transactionController.getHistory
+  );
 };

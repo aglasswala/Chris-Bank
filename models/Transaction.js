@@ -3,15 +3,25 @@ const Schema = mongoose.Schema;
 
 //create Schema
 const TransactionSchema = new Schema({
-  fromID: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-    required: [true, "please enter the origin user"]
+  from: {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "please enter the origin user"]
+    },
+    balance: {
+      type: Number
+    }
   },
-  toID: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-    required: [true, "please enter destination user"]
+  to: {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "please enter destination user"]
+    },
+    balance: {
+      type: Number
+    }
   },
   amount: {
     type: Number,
