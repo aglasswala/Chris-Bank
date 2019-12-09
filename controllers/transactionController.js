@@ -13,21 +13,21 @@ module.exports = {
     errors = {};
     if (amount < 0) {
       errors.bruh = "stop stealing bruh";
-      return res.status(400).json(errors);
+      return res.status(400).json({ err: errors });
     }
     User.findOne({ email: req.user.email }).then(fromUser => {
       if (!fromUser) {
         errors.fromAccountNotFound = "From Account Not Found";
-        return res.status(400).json(errors);
+        return res.status(400).json({ err: errors });
       }
       if (req.user.balance < amount) {
         errors.nofunds = "insuficient funds";
-        return re.status(400).json(errors);
+        return re.status(400).json({ err: errors });
       }
       User.findOne({ email: toEmail }).then(toUser => {
         if (!toUser) {
           errors.toAccountNotFound = "To User Not Found";
-          return res.status(400).json(errors);
+          return res.status(400).json({ err: errors });
         }
         new Transaction({
           from: {
