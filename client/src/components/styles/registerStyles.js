@@ -22,7 +22,7 @@ const registerStyles = theme => ({
     wrapper: {
       display: "inline-block",
       position: "relative",
-      padding: "8.85px 13px"
+      padding: "10"
     },
     form: {
       display: "flex",

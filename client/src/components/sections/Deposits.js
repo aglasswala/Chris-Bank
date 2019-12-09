@@ -10,13 +10,36 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import FilledInput from '@material-ui/core/FilledInput';
 import InputLabel from '@material-ui/core/InputLabel';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import ErrorIcon from '@material-ui/icons/Error';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Typography from '@material-ui/core/Typography';
 import Title from './Title';
 
 function preventDefault(event) {
   event.preventDefault();
 }
+
+const styles1 = theme => ({
+  error: {
+    backgroundColor: theme.palette.error.dark,
+  },
+  icon: {
+    fontSize: 20,
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+});
+
 
 const useStyles = makeStyles({
   depositContext: {
@@ -31,14 +54,26 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ]
 
+
+
 const Deposits = ({ ...props }) => {
   const [open, setOpen] = useState(false);
+  const [snOpen, setSNOpen] = useState(false);
   const [user, setUser] = useState({});
   const [toAccount, setTo] = useState("");
   const [balance, setBalance] = useState("");
+  const [er, setErrors] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
+  }
+
+  const handleSN = () => {
+    return setSNOpen(!snOpen);
+  }
+
+  const handleErrors = (mes) => {
+    return setErrors(mes);
   }
 
   const handleClose = () => {
@@ -67,9 +102,10 @@ const Deposits = ({ ...props }) => {
     return setTo("")
   }
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
-    fetch('http://localhost:3001/api/t/', { 
+    
+    await fetch('http://localhost:3001/api/t/', { 
         method: "post",
         headers: {
           'Content-Type': "application/json",
@@ -82,13 +118,20 @@ const Deposits = ({ ...props }) => {
     })
     .then(response => response.json())
     .then(result => {
+      if (result.err) {
+        throw new Error(result.err)
+      }
+
       handleClose(result)
       user.balance += balance
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      handleErrors(err.message)
+      handleSN()
+    })
   }
 
-  useEffect(() => {
+  useEffect( () => {
     fetch('http://localhost:3001/api/u/', { 
         method: "get",
         headers: {
@@ -103,12 +146,32 @@ const Deposits = ({ ...props }) => {
     .catch(err => console.log(err))
   }) 
 
+  const MySnackbarContent = (props) => {
+    const { classes, className, message, handleClose, variant, ...other } = props;
+    return (
+      <SnackbarContent
+        className={classes.error}
+        aria-describedby="client-snackbar"
+        message={
+          <span id="client-snackbar" className={classes.message}>
+            <ErrorIcon className={classes.iconVariant} style={{fontSize: 20}} />
+            {er}
+          </span>
+        }
+        {...other}
+      />
+    );
+  }
+
+  const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
+
   const classes = useStyles();
   return (
     <Fragment>
+      <Typography variant="body1" color="primary">Hey {user.firstName} {user.lastName}</Typography>
       <Title>Checking Balance</Title>
       <Typography component="p" variant="h4">
-        ${user.balance}
+        ${(+(user.balance)).toFixed(2)}
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
         {day + " " + monthNames[month] + ", " + year}
@@ -164,6 +227,22 @@ const Deposits = ({ ...props }) => {
           </Button>
         </DialogActions>
       </Dialog>
+       <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={snOpen}
+          autoHideDuration={6000}
+          // onClose={this.handleClose}
+        >
+         <MySnackbarContentWrapper
+          variant="error"
+          className={classes.margin}
+          message="Invalid Credentials!"
+          handleClose = {handleSN}
+        />
+      </Snackbar>
     </Fragment>
   );
 }

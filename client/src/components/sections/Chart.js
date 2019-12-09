@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
@@ -20,8 +20,41 @@ const data = [
   createData('24:00', undefined),
 ];
 
-export default function Chart() {
+const filData = (rows) => {
+  let filteredRows = []
+  rows.forEach((row) => {
+    filteredRows.push({
+      time: new Date(row.date).toLocaleTimeString(),
+      amount: row.balance
+    })
+  })
+
+  return filteredRows.reverse()
+}
+
+function Chart() {
   const theme = useTheme();
+  const [data, setData] = useState([])
+
+  const handleData = (dat) => {
+    return setData(dat)
+  }
+
+  useEffect(() => {
+    fetch("http://localhost:3001/api/t", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("cool-jwt")
+      }
+    })
+      .then(response => response.json()) 
+      .then(result => {
+        const filDa = filData(result)
+        handleData(filDa)
+      })
+      .catch(err => console.log(err))
+  })  
 
   return (
     <Fragment>
@@ -51,3 +84,5 @@ export default function Chart() {
     </Fragment>
   );
 }
+
+export default Chart
