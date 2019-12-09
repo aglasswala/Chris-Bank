@@ -62,7 +62,7 @@ const Deposits = ({ ...props }) => {
   const [user, setUser] = useState({});
   const [toAccount, setTo] = useState("");
   const [balance, setBalance] = useState("");
-  const [er, setErrors] = useState("");
+  const [errors, setErrors] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -104,6 +104,7 @@ const Deposits = ({ ...props }) => {
 
   const submit = async (e) => {
     e.preventDefault()
+    handleErrors()
     
     await fetch('http://localhost:3001/api/t/', { 
         method: "post",
@@ -127,7 +128,6 @@ const Deposits = ({ ...props }) => {
     })
     .catch(err => {
       handleErrors(err.message)
-      handleSN()
     })
   }
 
@@ -155,7 +155,7 @@ const Deposits = ({ ...props }) => {
         message={
           <span id="client-snackbar" className={classes.message}>
             <ErrorIcon className={classes.iconVariant} style={{fontSize: 20}} />
-            {er}
+            {errors}
           </span>
         }
         {...other}
@@ -184,6 +184,14 @@ const Deposits = ({ ...props }) => {
       >
         <DialogTitle>{"Create a transaction"}</DialogTitle>
         <DialogContent>
+          { errors ?                          
+            <Typography
+                variant="body1"
+                color="error"
+                align="center"
+            >
+                {errors}
+            </Typography> : null }
           <form
               className={classes.form}
           >
