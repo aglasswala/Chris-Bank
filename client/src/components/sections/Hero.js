@@ -1,13 +1,8 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { Grid, Typography, withStyles, Button, Paper, FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core'
 import Validator from 'validator'
 import heroStyles from '../styles/heroStyles';
 import { ScrollDownIndicator } from 'react-landing-page'
-import BackgroundSlider from 'react-background-slider'
-
-import image1 from '../styles/pictures/card.jpg'
-import image3 from '../styles/pictures/money.jpg'
-import image4 from '../styles/pictures/building.jpg'
 
 import { NavLink } from 'react-router-dom'
 

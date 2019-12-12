@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './components/styles/App.css'
 
+/**
+ * Inject the app component into the div element ('root')
+ */
 ReactDOM.render(<App />, document.getElementById('root'));

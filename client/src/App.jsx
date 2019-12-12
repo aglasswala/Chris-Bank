@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { createMuiTheme } from '@material-ui/core/styles';
 import LandingPage from './components/views/Landing';
-import Login from './components/views/Login'
 import Register from './components/views/Register'
 import Dashboard from './components/views/Dashboard'
 import BackgroundSlider from 'react-background-slider'
@@ -23,15 +23,20 @@ const theme = createMuiTheme({
   },
 });
 
+/**
+ *
+ * Main app component with routes
+ * 
+ */
 const App = () => (
   <Router>
     <MuiThemeProvider theme={theme}>
+     <CssBaseline />
       <BackgroundSlider
         images={[image1, image3, image4]}
         duration={2} transition={2} />
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/dashboard" component={Dashboard} />
       </Switch>

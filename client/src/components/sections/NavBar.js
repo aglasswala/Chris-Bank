@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import { Toolbar, AppBar, withStyles, Grid, Typography, Button } from "@material-ui/core"
+import React from 'react'
+import { Toolbar, AppBar, withStyles, Grid, Typography } from "@material-ui/core"
 import navbarStyles from '../styles/navbarStyles';
-import { NavLink } from 'react-router-dom'
 
 const NavBar = ({ ...props }) => {
     const { classes } = props

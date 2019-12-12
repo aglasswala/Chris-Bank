@@ -47,21 +47,8 @@ const heroStyles = theme => ({
        fontSize: "calc(12px + 1.5vw)",
        fontFamily: "Roboto"
     },
-    image: {
-        width: "100%",
-        height: "auto",
-        minHeight: "100vh",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed"
-    },
     outer: {
         padding: 20
-    },
-    grad: {
-        background: "linear-gradient(to bottom right, rgba(209, 25, 13, 0.9) 0%, rgba(34, 31, 31, 0.9) 100%)",
-        height: "auto",
-        minHeight: "100vh"
     },
     signIn: {
         fontFamily: "Dancing Script, cursive"

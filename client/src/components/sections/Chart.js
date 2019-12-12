@@ -3,19 +3,12 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
 
-
-
 function Chart() {
   const theme = useTheme();
   const [data, setData] = useState([])
-  const [user, setUser] = useState({});
 
   const handleData = (dat) => {
     return setData(dat)
-  }
-
-  const handleUser = (usr) => {
-    return setUser(usr)
   }
 
   const filData = (rows) => {
@@ -45,19 +38,6 @@ function Chart() {
       })
       .catch(err => console.log(err))
   })  
-
-  // fetch('http://localhost:3001/api/u/', { 
-  //     method: "get",
-  //     headers: {
-  //       'Content-Type': "application/json",
-  //       'Authorization': localStorage.getItem("cool-jwt")
-  //     }
-  // })
-  // .then(response => response.json())
-  // .then(result => {
-  //   handleUser(result)
-  // })
-  // .catch(err => console.log(err))
 
   return (
     <Fragment>

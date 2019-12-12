@@ -1,11 +1,8 @@
 import React from 'react'
-import { Grid, Typography, withStyles, Button } from '@material-ui/core'
+import { Grid, Typography, withStyles } from '@material-ui/core'
 import footerStyles from '../styles/footerStyles'
 
-import { NavLink } from 'react-router-dom'
-
-const Footer = ({ ...props }) => {
-    const { classes } = props
+const Footer = () => {
     return (
     	<div style={{height: "80px"}}>
             <Grid
@@ -21,7 +18,7 @@ const Footer = ({ ...props }) => {
             		    align="center"
             		    style={{padding: 20}}
             		>
-            			<a href="#" style={{textDecoration: "none"}}>About Cris Bank</a>
+            			<a href="/#" style={{textDecoration: "none"}}>About Cris Bank</a>
             		</Typography>
             	</Grid>
             	<Grid item>
@@ -31,7 +28,7 @@ const Footer = ({ ...props }) => {
             		    align="center"
             		    style={{padding: 20}}
             		>
-            			<a href="#" style={{textDecoration: "none"}}>Careers</a>
+            			<a href="/#" style={{textDecoration: "none"}}>Careers</a>
             		</Typography>
             	</Grid>
             	<Grid item>
@@ -41,7 +38,7 @@ const Footer = ({ ...props }) => {
             		    align="center"
             		    style={{padding: 20}}
             		>
-            			<a href="#" style={{textDecoration: "none"}}>Report Fraud</a>
+            			<a href="/#" style={{textDecoration: "none"}}>Report Fraud</a>
             		</Typography>
             	</Grid>
             	<Grid item>
@@ -51,7 +48,7 @@ const Footer = ({ ...props }) => {
             		    align="center"
             		    style={{padding: 20}}
             		>
-            			<a href="#" style={{textDecoration: "none"}}>Contact us</a>
+            			<a href="/#" style={{textDecoration: "none"}}>Contact us</a>
             		</Typography>
             	</Grid>
             </Grid>	

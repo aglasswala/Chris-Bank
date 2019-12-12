@@ -1,6 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,24 +8,8 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Title from './Title';
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles(theme => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
 const filterRows = (rows) => {
   let filteredRows = []
-  let icon
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ]
@@ -55,7 +37,6 @@ const filterRows = (rows) => {
 
 function Orders() {
   const [rows, setRows] = useState([]);
-  const classes = useStyles();
 
   const handleRows = (rows) => {
     return setRows(rows)

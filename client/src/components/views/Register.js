@@ -1,10 +1,14 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import { Grid, Paper, withStyles, Typography, FormControl, Button, InputLabel, Input } from "@material-ui/core";
 
 import registerStyles from "../styles/registerStyles";
-import RegisterForm from "../forms/RegisterForm";
 
+/**
+ *
+ * Main Register Element
+ * 
+ */
 const Register = ({ ...props }) => {
   const { classes } = props
   const [email, setEmail] = useState("")

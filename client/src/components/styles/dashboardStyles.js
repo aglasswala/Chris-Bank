@@ -1,7 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
-
 const dashboardStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
