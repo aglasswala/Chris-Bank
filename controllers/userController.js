@@ -8,9 +8,16 @@ const User = require("../models/User");
 // const validateLoginInput = require("../validation/login");
 
 module.exports = {
+  //  @route  GET api/u/test
+  //  @desc   Test users route
+  //  @access Public
   test: (req, res) => {
     return res.status(200).json("all good");
   },
+
+  //  @route  GET api/u
+  //  @desc   Get current user
+  //  @access Private
   getCurrentUser: (req, res) => {
     res.status(200).json({
       firstName: req.user.firstName,
@@ -21,6 +28,9 @@ module.exports = {
     });
   },
 
+  //  @route  POST api/u/register
+  //  @desc   Register user
+  //  @access Public
   registerUser: async (req, res) => {
     // const { errors, isValid } = validateRegisterInput(req.body);
     // //check validation
@@ -71,6 +81,9 @@ module.exports = {
       .catch(err => res.status(400).send({ err }));
   },
 
+  //  @route  POST api/u/login
+  //  @desc   Login user
+  //  @access Public
   loginUser: (req, res) => {
     let errors = {};
     const email = req.body.email;
@@ -106,6 +119,10 @@ module.exports = {
       });
     });
   },
+
+  //  @route  GET api/u/getbal
+  //  @desc   Get user balance
+  //  @access Public
   getBalance: (req, res) => {
     return res.status(200).json(req.user.balance);
   }
